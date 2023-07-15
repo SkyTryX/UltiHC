@@ -1,4 +1,4 @@
-package fr.skytryx.ultihc.scenarios;
+package fr.skytryx.ultihc.scenarios.config;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;

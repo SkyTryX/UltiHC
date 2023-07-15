@@ -114,7 +114,9 @@ public class ToolsClick implements Listener{
 			Inventory scenarioinv = Bukkit.createInventory(null, 27, "§7Scenarios");
 			
 			scenarioinv.addItem(ItemCreator("§6CutClean", Material.LAVA_BUCKET, "Cooks ores instantly."));
-			scenarioinv.addItem(ItemCreator("§6NoClean", Material.DIAMOND_SWORD, "Gives you 30 seconds of invisibility after a kill"));
+			scenarioinv.addItem(ItemCreator("§6NoClean", Material.DIAMOND_SWORD, "Gives you 30 seconds of invisibility after a kill §cWORK IN PROGRESS"));
+			scenarioinv.addItem(ItemCreator("§6Timber", Material.WOOD, "Breaking one log breaks the whole tree"));
+			scenarioinv.addItem(ItemCreator("§6HasteyBoys", Material.GOLD_PICKAXE, "Gives Efficiency 3 and Unbreaking 3 to tools"));
 			player.closeInventory();
 			player.openInventory(scenarioinv);	
 		} else if (ClickedItem.equals("Start")) {

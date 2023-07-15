@@ -9,12 +9,14 @@ import fr.skytryx.ultihc.events.OnJoin;
 import fr.skytryx.ultihc.events.OnLeave;
 import fr.skytryx.ultihc.events.OnDamage;
 import fr.skytryx.ultihc.events.ToolsClick;
-import fr.skytryx.ultihc.scenarios.Bedbombs;
 import fr.skytryx.ultihc.scenarios.CutClean;
-import fr.skytryx.ultihc.scenarios.GodApples;
-import fr.skytryx.ultihc.scenarios.Nether;
+import fr.skytryx.ultihc.scenarios.HasteyBoys;
 import fr.skytryx.ultihc.scenarios.NoClean;
-import fr.skytryx.ultihc.scenarios.Scenarios;
+import fr.skytryx.ultihc.scenarios.Timber;
+import fr.skytryx.ultihc.scenarios.config.Bedbombs;
+import fr.skytryx.ultihc.scenarios.config.GodApples;
+import fr.skytryx.ultihc.scenarios.config.Nether;
+import fr.skytryx.ultihc.scenarios.config.Scenarios;
 import fr.skytryx.ultihc.utils.Settings;
 import fr.skytryx.ultihc.utils.WorldCreation;
 
@@ -22,11 +24,6 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		System.out.println("[UltiHC] Plugin has been enabled");
-		WorldCreation.CreateWorld();
-		Settings.reset();
-
-		
 		getCommand("inspectmap").setExecutor(new CommandInspectmap());
 		getCommand("reloadmap").setExecutor(new CommandReloadmap());
 		
@@ -44,11 +41,16 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new GodApples(), this);
 		getServer().getPluginManager().registerEvents(new CutClean(), this);
 		getServer().getPluginManager().registerEvents(new NoClean(), this);
+		getServer().getPluginManager().registerEvents(new Timber(), this);
+		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
+		
+		System.out.println("[UltiHC] Plugin has been enabled");
+		WorldCreation.CreateWorld();
+		Settings.reset();
 	}
 	
 	@Override
 	public void onDisable() {
 		System.out.println("[UltiHC] Plugin has been enabled");
 	}
-	
 }

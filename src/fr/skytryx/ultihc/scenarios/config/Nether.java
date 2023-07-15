@@ -1,4 +1,4 @@
-package fr.skytryx.ultihc.scenarios;
+package fr.skytryx.ultihc.scenarios.config;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

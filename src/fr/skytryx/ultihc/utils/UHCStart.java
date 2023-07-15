@@ -49,7 +49,6 @@ public class UHCStart {
 		int z = getRandomNumberInRange(-Integer.parseInt(Settings.get("Border")), Integer.parseInt(Settings.get("Border")));
 		for (int y = 100; y > 58; y--) {
 			Material block_spawn = Bukkit.getWorld("UHC").getBlockAt(new Location(Bukkit.getWorld("UHC"), x, y, z)).getType();
-			p.sendMessage(block_spawn.toString());
 			if(block_spawn == Material.STATIONARY_LAVA || block_spawn == Material.STATIONARY_WATER) {
 				ChooseSpawn(p);
 				return;

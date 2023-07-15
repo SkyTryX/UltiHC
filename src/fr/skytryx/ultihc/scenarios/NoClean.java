@@ -18,13 +18,12 @@ public class NoClean implements Listener {
 
 	@EventHandler
 	public void Death(PlayerDeathEvent event) {
-		if(!(Settings.scenariolist.contains("NoClean"))) return;
-		if(!(event.getEntity().getKiller() instanceof Player)) return;
-		if(Chronometer.get() == -1) return;
+		if(!(Settings.scenariolist.contains("NoClean") || event.getEntity().getKiller() instanceof Player) || Chronometer.get() == -1) return;
 		NoCleanList.put(event.getEntity().getKiller(), Chronometer.get());
 	}
 	   @EventHandler
 	    public void onHit(EntityDamageEvent event) {
-
+		   if(!(Settings.scenariolist.contains("NoClean") || event.getEntity() instanceof Player) || Chronometer.get() == -1) return;
+		   //Work in progress
 	    }
 }
