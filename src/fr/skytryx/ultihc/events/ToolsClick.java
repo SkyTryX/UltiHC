@@ -63,7 +63,7 @@ public class ToolsClick implements Listener{
 					configinv.addItem(ItemCreator("§6BedBombs", Material.BED, Settings.get("BedBombs")));
 					configinv.addItem(ItemCreator("§6God Apples", Material.GOLDEN_APPLE, Settings.get("God Apples")));
 					configinv.addItem(ItemCreator("§6FinalHeal", Material.GOLDEN_CARROT, Settings.get("FinalHeal")+"m"));
-					configinv.setItem(configinv.getSize()-2, ItemCreator("§6Scenarios", Material.BOOKSHELF, Settings.get("Scenarios")));
+					configinv.setItem(configinv.getSize()-2, ItemCreator("§6Scenarios", Material.BOOKSHELF, Settings.get("Scenarios").replace("[", "").replace("]", "")));
 					configinv.setItem(configinv.getSize()-1, ItemCreator("§6Start", Material.EMERALD_BLOCK, "Click here to start the uhc!"));
 	            }
 	        }, 1L, 1L);
@@ -117,6 +117,8 @@ public class ToolsClick implements Listener{
 			scenarioinv.addItem(ItemCreator("§6Timber", Material.LOG, "Breaking one log breaks the whole tree"));
 			scenarioinv.addItem(ItemCreator("§6HasteyBoys", Material.GOLD_PICKAXE, "Gives Efficiency 3 and Unbreaking 3 to tools"));
 			scenarioinv.addItem(ItemCreator("§6NoFall", Material.GOLD_BOOTS, "Players are immune to fall damage"));
+			scenarioinv.addItem(ItemCreator("§6AbsorptionLess", Material.GOLDEN_APPLE, "Players are immune to fall damage"));
+			scenarioinv.addItem(ItemCreator("§6BleedingSweets", Material.SUGAR, "Players are immune to fall damage"));
 			player.closeInventory();
 			player.openInventory(scenarioinv);	
 		} else if (ClickedItem.equals("Start")) {

@@ -9,6 +9,8 @@ import fr.skytryx.ultihc.events.OnJoin;
 import fr.skytryx.ultihc.events.OnLeave;
 import fr.skytryx.ultihc.events.OnDamage;
 import fr.skytryx.ultihc.events.ToolsClick;
+import fr.skytryx.ultihc.scenarios.AbsorptionLess;
+import fr.skytryx.ultihc.scenarios.BleedingSweets;
 import fr.skytryx.ultihc.scenarios.CutClean;
 import fr.skytryx.ultihc.scenarios.HasteyBoys;
 import fr.skytryx.ultihc.scenarios.NoClean;
@@ -40,11 +42,14 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Nether(), this);
 		getServer().getPluginManager().registerEvents(new Bedbombs(), this);
 		getServer().getPluginManager().registerEvents(new GodApples(), this);
+		
 		getServer().getPluginManager().registerEvents(new CutClean(), this);
 		getServer().getPluginManager().registerEvents(new NoClean(), this);
 		getServer().getPluginManager().registerEvents(new Timber(), this);
 		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
 		getServer().getPluginManager().registerEvents(new NoFall(), this);
+		getServer().getPluginManager().registerEvents(new AbsorptionLess(), this);
+		getServer().getPluginManager().registerEvents(new BleedingSweets(), this);
 		
 		System.out.println("[UltiHC] Plugin has been enabled");
 		WorldCreation.CreateWorld();

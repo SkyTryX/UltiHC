@@ -1,6 +1,6 @@
 package fr.skytryx.ultihc.scenarios;
 
-import org.bukkit.entity.Player;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -12,7 +12,7 @@ public class NoFall implements Listener {
 
 	   @EventHandler
 	    public void onHit(EntityDamageEvent event) {
-		   if(!(Settings.scenariolist.contains("NoFall") || event.getEntity() instanceof Player)) return;
+		   if(!Settings.scenariolist.contains("NoFall") || !(event.getEntity().getType() == EntityType.PLAYER)) return;
 		   if(event.getCause() == DamageCause.FALL) {
 			   event.setCancelled(true);
 		   }
