@@ -19,7 +19,6 @@ import fr.skytryx.ultihc.utils.Settings;
 import fr.skytryx.ultihc.utils.Timer;
 import fr.skytryx.ultihc.utils.GiveInv;
 import fr.skytryx.ultihc.utils.Scoreboards;
-//import fr.skytryx.ultihc.utils.WorldCreation;
 
 
 public class ToolsClick implements Listener{
@@ -64,8 +63,8 @@ public class ToolsClick implements Listener{
 					configinv.addItem(ItemCreator("§6BedBombs", Material.BED, Settings.get("BedBombs")));
 					configinv.addItem(ItemCreator("§6God Apples", Material.GOLDEN_APPLE, Settings.get("God Apples")));
 					configinv.addItem(ItemCreator("§6FinalHeal", Material.GOLDEN_CARROT, Settings.get("FinalHeal")+"m"));
-					configinv.setItem(16, ItemCreator("§6Scenarios", Material.BOOKSHELF, Settings.get("Scenarios")));
-					configinv.setItem(17, ItemCreator("§6Start", Material.EMERALD_BLOCK, "Click here to start the uhc!"));
+					configinv.setItem(configinv.getSize()-2, ItemCreator("§6Scenarios", Material.BOOKSHELF, Settings.get("Scenarios")));
+					configinv.setItem(configinv.getSize()-1, ItemCreator("§6Start", Material.EMERALD_BLOCK, "Click here to start the uhc!"));
 	            }
 	        }, 1L, 1L);
 			player.openInventory(configinv);
@@ -115,8 +114,9 @@ public class ToolsClick implements Listener{
 			
 			scenarioinv.addItem(ItemCreator("§6CutClean", Material.LAVA_BUCKET, "Cooks ores instantly."));
 			scenarioinv.addItem(ItemCreator("§6NoClean", Material.DIAMOND_SWORD, "Gives you 30 seconds of invisibility after a kill §cWORK IN PROGRESS"));
-			scenarioinv.addItem(ItemCreator("§6Timber", Material.WOOD, "Breaking one log breaks the whole tree"));
+			scenarioinv.addItem(ItemCreator("§6Timber", Material.LOG, "Breaking one log breaks the whole tree"));
 			scenarioinv.addItem(ItemCreator("§6HasteyBoys", Material.GOLD_PICKAXE, "Gives Efficiency 3 and Unbreaking 3 to tools"));
+			scenarioinv.addItem(ItemCreator("§6NoFall", Material.GOLD_BOOTS, "Players are immune to fall damage"));
 			player.closeInventory();
 			player.openInventory(scenarioinv);	
 		} else if (ClickedItem.equals("Start")) {
@@ -146,7 +146,6 @@ public class ToolsClick implements Listener{
 			GiveInv.GiveStaffInv(event.getPlayer());
 			Timer.start();
 			Bukkit.getOnlinePlayers().forEach(p ->{
-				//WorldCreation.PregenerateWorld();
 				Scoreboards.PreGame(p);
 			});
 			event.getPlayer().sendMessage("§6The UHC has been set up!");

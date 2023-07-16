@@ -20,6 +20,9 @@ public class Timer {
 			   if(Timer.get() == 0) {
 				   Fill.fillcount = Fill.get().size();
 				   Bukkit.getScheduler().cancelAllTasks();
+					if(Settings.get("Monster Spawning").equals("true")) Bukkit.getWorld("UHC").setMonsterSpawnLimit(0);
+					Bukkit.getWorld("UHC").getWorldBorder().setSize(Integer.parseInt(Settings.get("Border"))*2);
+					Bukkit.getWorld("UHC_nether").getWorldBorder().setSize((Integer.parseInt(Settings.get("Border"))*2)/8);
 				   UHCStart.Scatter(Fill.get());
 				   Chronometer.start();
 			   }

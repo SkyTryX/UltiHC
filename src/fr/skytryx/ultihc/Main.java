@@ -12,6 +12,7 @@ import fr.skytryx.ultihc.events.ToolsClick;
 import fr.skytryx.ultihc.scenarios.CutClean;
 import fr.skytryx.ultihc.scenarios.HasteyBoys;
 import fr.skytryx.ultihc.scenarios.NoClean;
+import fr.skytryx.ultihc.scenarios.NoFall;
 import fr.skytryx.ultihc.scenarios.Timber;
 import fr.skytryx.ultihc.scenarios.config.Bedbombs;
 import fr.skytryx.ultihc.scenarios.config.GodApples;
@@ -43,6 +44,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new NoClean(), this);
 		getServer().getPluginManager().registerEvents(new Timber(), this);
 		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
+		getServer().getPluginManager().registerEvents(new NoFall(), this);
 		
 		System.out.println("[UltiHC] Plugin has been enabled");
 		WorldCreation.CreateWorld();

@@ -22,9 +22,6 @@ public class UHCStart {
 	
 	public static void Scatter(List<Player> players) {
 		Bukkit.broadcastMessage("§bStarting to scatter all players!");
-		if(Settings.get("Monster Spawning").equals("true")) Bukkit.getWorld("UHC").setMonsterSpawnLimit(0);
-		Bukkit.getWorld("UHC").getWorldBorder().setSize(Integer.parseInt(Settings.get("Border"))*2);
-		Bukkit.getWorld("UHC_nether").getWorldBorder().setSize((Integer.parseInt(Settings.get("Border"))*2)/8);
 		players.forEach(p ->{
 			p.getInventory().clear();
 			p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 16));

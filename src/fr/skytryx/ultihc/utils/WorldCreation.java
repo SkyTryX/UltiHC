@@ -19,15 +19,15 @@ public class WorldCreation {
 		Bukkit.getOnlinePlayers().forEach(player ->{player.kickPlayer("You have been kicked due to the map being reloaded.");});	
 		if(Bukkit.getWorld("UHC") != null) Bukkit.unloadWorld("UHC", false);
 		try { FileUtils.deleteDirectory(new File("UHC"));} catch (IOException e) {System.out.println("[UltiHC] UHC Folder not existing");}
-		
 		World world = new WorldCreator("UHC").createWorld();
+		
 		if((world.getBiome(0, 0) == Biome.DESERT || world.getBiome(0, 0) == Biome.PLAINS) && world.getBlockAt(new Location(world, 0, 62, 0)).getType() != Material.WATER) {
 			System.out.println("[UltiHC] UHCWorld has been created, creating nether!");
 			WorldCreator netherworld = new WorldCreator("UHC_nether");
 			netherworld.environment(World.Environment.NETHER);
 			netherworld.createWorld();
 			System.out.println("[UltiHC] Created Nether!");
-			
+			world.setGameRuleValue("naturalRegeneration", "false");
 		} else {
 			System.out.println("[UltiHC] World is getting reloaded due to 0 0 not being flat");
 			CreateWorld();
