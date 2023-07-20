@@ -24,6 +24,8 @@ public class Settings {
 	public static void reset() {
 		settingsuhc.put("Team Size", "1");
 		settingsuhc.put("Border", "2000");
+		settingsuhc.put("FirstShrink", "40");
+		settingsuhc.put("ShrinkTime", "5");
 		settingsuhc.put("Monster Spawning", "false");
 		settingsuhc.put("Nether", "true");
 		settingsuhc.put("PvP", "20");

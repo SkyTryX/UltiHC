@@ -2,7 +2,6 @@ package fr.skytryx.ultihc.utils;
 
 import org.bukkit.Bukkit;
 
-import fr.skytryx.ultihc.scenarios.NoClean;
 import net.md_5.bungee.api.ChatColor;
 
 public class Chronometer {
@@ -27,14 +26,24 @@ public class Chronometer {
 					   p.setSaturation(20);
 				   });
 			   }
-			   if(Integer.parseInt(Settings.get("PvP"))*60-get() == 0) {
-				   Bukkit.broadcastMessage(ChatColor.AQUA+"PvP has been enabled!");
+			   if(Integer.parseInt(Settings.get("PvP"))*60-get() == 0) Bukkit.broadcastMessage(ChatColor.AQUA+"PvP has been enabled!");
+			   if(Integer.parseInt(Settings.get("FirstShrink"))*60-get() == 0) {
+				   Settings.set("Border", String.valueOf(Integer.parseInt(Settings.get("Border"))/2));
+				   Bukkit.getOnlinePlayers().forEach(p ->{
+					   if(p.getLocation().getX() > Integer.parseInt(Settings.get("Border"))/2 || p.getLocation().getZ() > Integer.parseInt(Settings.get("Border"))/2
+						  || p.getLocation().getX() < -Integer.parseInt(Settings.get("Border"))/2 || p.getLocation().getZ() < -Integer.parseInt(Settings.get("Border"))/2) {
+						   UHCStart.ChooseSpawn(p);
+					   }
+				   });
+					   Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("UltiHC"), ()->{
+						   Bukkit.getWorld("UHC").getWorldBorder().setSize(Integer.parseInt(Settings.get("Border"))*2);
+						   Bukkit.getWorld("UHC_nether").getWorldBorder().setSize((Integer.parseInt(Settings.get("Border"))*2)/8);
+						   if(Integer.parseInt(Settings.get("Border")) > 25)Settings.set("FirstShrink", String.valueOf(Integer.parseInt(Settings.get("FirstShrink"))+Settings.get("ShrinkTime")));
+						   Bukkit.broadcastMessage("§bThe Border has shrunk to §6"+ Settings.get("Border"));
+
+
+				   });
 			   }
-			   Bukkit.getOnlinePlayers().forEach(p ->{if(NoClean.NoCleanList.containsKey(p)){
-				   NoClean.NoCleanList.remove(p);
-				   p.sendMessage(ChatColor.RED+"You are no longer in NoClean mode!");   
-				   }
-			   });
 			}, 0L , 20L);
 		}
 

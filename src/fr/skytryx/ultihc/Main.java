@@ -13,6 +13,7 @@ import fr.skytryx.ultihc.scenarios.AbsorptionLess;
 import fr.skytryx.ultihc.scenarios.BleedingSweets;
 import fr.skytryx.ultihc.scenarios.CutClean;
 import fr.skytryx.ultihc.scenarios.HasteyBoys;
+import fr.skytryx.ultihc.scenarios.LuckyLeaves;
 import fr.skytryx.ultihc.scenarios.NoClean;
 import fr.skytryx.ultihc.scenarios.NoFall;
 import fr.skytryx.ultihc.scenarios.Timber;
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new NoFall(), this);
 		getServer().getPluginManager().registerEvents(new AbsorptionLess(), this);
 		getServer().getPluginManager().registerEvents(new BleedingSweets(), this);
+		getServer().getPluginManager().registerEvents(new LuckyLeaves(), this);
 		
 		System.out.println("[UltiHC] Plugin has been enabled");
 		WorldCreation.CreateWorld();

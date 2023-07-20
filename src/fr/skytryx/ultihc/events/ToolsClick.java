@@ -41,11 +41,10 @@ public class ToolsClick implements Listener{
 	}
 	@EventHandler
 	public void OnClick(PlayerInteractEvent event) {
-		if(event.getItem() == null || event.getItem().getItemMeta() == null) return;
-		
-		
 		Player player = event.getPlayer();
 		ItemStack item = event.getItem();
+		
+		if(event.getItem() == null) return;
 		
 		if(item.getItemMeta().getDisplayName() == "§6Configurations") {
 			event.setCancelled(true);
@@ -57,6 +56,8 @@ public class ToolsClick implements Listener{
 					configinv.clear();
 					configinv.addItem(ItemCreator("§6Team Size", Material.ITEM_FRAME, "To"+Settings.get("Team Size")));
 					configinv.addItem(ItemCreator("§6Border", Material.BEDROCK, Settings.get("Border")+"x"));
+					configinv.addItem(ItemCreator("§6FirstShrink", Material.WOOD_DOOR, Settings.get("FirstShrink")+"m"));
+					configinv.addItem(ItemCreator("§6ShrinkTime", Material.WATCH, Settings.get("ShrinkTime")+"m"));
 					configinv.addItem(ItemCreator("§6Monster Spawning", Material.SKULL_ITEM, Settings.get("Monster Spawning")));
 					configinv.addItem(ItemCreator("§6Nether", Material.NETHERRACK, Settings.get("Nether")));
 					configinv.addItem(ItemCreator("§6PvP", Material.DIAMOND_SWORD, Settings.get("PvP")+"m"));
@@ -77,54 +78,32 @@ public class ToolsClick implements Listener{
 		event.setCancelled(true);
 		String ClickedItem = event.getCurrentItem().getItemMeta().getDisplayName().substring(2);
 		Player player = (Player) event.getWhoClicked();
-		if(ClickedItem.equals("Nether")) {
-			if(Settings.get("Nether").equals("true")){
-				Settings.set("Nether", "false");
-			} else Settings.set("Nether", "true");
-		} else if (ClickedItem.equals("Monster Spawning")) {
-			if(Settings.get("Monster Spawning").equals("true")){
-				Settings.set("Monster Spawning", "false");
-			} else Settings.set("Monster Spawning", "true");
-		} else if (ClickedItem.equals("BedBombs")) {
-			if(Settings.get("BedBombs").equals("true")){
-				Settings.set("BedBombs", "false");
-			} else Settings.set("BedBombs", "true");
-		} else if (ClickedItem.equals("God Apples")) {
-			if(Settings.get("God Apples").equals("true")){
-				Settings.set("God Apples", "false");
-			} else Settings.set("God Apples", "true");
-		} else if (ClickedItem.equals("PvP")) {
-			input = "PvP";
+		if(Arrays.asList("Nether", "Monster Spawning", "BedBombs", "God Apples").contains(ClickedItem)) {
+			if(Settings.get(ClickedItem).equals("true")){
+				Settings.set(ClickedItem, "false");
+			} else Settings.set(ClickedItem, "true");
+
+		} else if (Arrays.asList("PvP", "FinalHeal", "Team Size", "Border", "FirstShrink", "ShrinkTime").contains(ClickedItem)) {
+			input = ClickedItem;
 			player.closeInventory();
-			player.sendMessage("§4[Input] §bSend in chat the timestamp as an integer (10 for example)");
-		} else if (ClickedItem.equals("FinalHeal")) {
-			input = "FinalHeal";
-			player.closeInventory();
-			player.sendMessage("§4[Input] §bSend in chat the timestamp as an integer (10 for example)");
-		} else if (ClickedItem.equals("Team Size")) {
-			input = "Team Size";
-			player.closeInventory();
-			player.sendMessage("§4[Input] §bSend in chat the team size as an integer (10 for example)");
-		} else if (ClickedItem.equals("Border")) {
-			input = "Border";
-			player.closeInventory();
-			player.sendMessage("§4[Input] §bSend in chat the border size as an integer (10 for example)");
+			player.sendMessage("§4[Input] §bSend in chat the "+ClickedItem+" as an integer (10 for example)");
+
 		} else if (ClickedItem.equals("Scenarios")) {
 			Inventory scenarioinv = Bukkit.createInventory(null, 27, "§7Scenarios");
-			
 			scenarioinv.addItem(ItemCreator("§6CutClean", Material.LAVA_BUCKET, "Cooks ores instantly."));
 			scenarioinv.addItem(ItemCreator("§6NoClean", Material.DIAMOND_SWORD, "Gives you 30 seconds of invisibility after a kill §cWORK IN PROGRESS"));
 			scenarioinv.addItem(ItemCreator("§6Timber", Material.LOG, "Breaking one log breaks the whole tree"));
 			scenarioinv.addItem(ItemCreator("§6HasteyBoys", Material.GOLD_PICKAXE, "Gives Efficiency 3 and Unbreaking 3 to tools"));
 			scenarioinv.addItem(ItemCreator("§6NoFall", Material.GOLD_BOOTS, "Players are immune to fall damage"));
-			scenarioinv.addItem(ItemCreator("§6AbsorptionLess", Material.GOLDEN_APPLE, "Players are immune to fall damage"));
-			scenarioinv.addItem(ItemCreator("§6BleedingSweets", Material.SUGAR, "Players are immune to fall damage"));
+			scenarioinv.addItem(ItemCreator("§6AbsorptionLess", Material.GOLDEN_APPLE, "GoldenApples does not grant absorption anymore"));
+			scenarioinv.addItem(ItemCreator("§6BleedingSweets", Material.SUGAR, "Killing players gives ores"));
+			scenarioinv.addItem(ItemCreator("§6LuckyLeaves", Material.LEAVES, "Golden apples sometimes drops when a leave breaks"));
 			player.closeInventory();
 			player.openInventory(scenarioinv);	
 		} else if (ClickedItem.equals("Start")) {
+			input = "Timer";
 			player.closeInventory();
 			player.sendMessage("§4[Input] §bSend in chat the timer in seconds as an integer (10 for example)");
-			input = "Timer";
 		}
 	}
 	
@@ -139,10 +118,10 @@ public class ToolsClick implements Listener{
 			input = null;
 			return;
 		}
-		if(input == "PvP" || input == "FinalHeal" || input == "Team Size" || input == "Border") {
+		if(Arrays.asList("PvP", "FinalHeal", "Team Size", "Border", "FirstShrink", "ShrinkTime").contains(input)){
 			Settings.set(input, event.getMessage());
 			event.getPlayer().sendMessage("§bSet "+input+" to §6"+event.getMessage());
-		} else if(input == "Timer") {
+		} else if(input.equals("Timer")) {
 			Timer.set(Integer.parseInt(event.getMessage()));
 			event.getPlayer().getInventory().clear();
 			GiveInv.GiveStaffInv(event.getPlayer());

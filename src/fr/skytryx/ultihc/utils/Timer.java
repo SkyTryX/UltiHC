@@ -25,6 +25,7 @@ public class Timer {
 					Bukkit.getWorld("UHC_nether").getWorldBorder().setSize((Integer.parseInt(Settings.get("Border"))*2)/8);
 				   UHCStart.Scatter(Fill.get());
 				   Chronometer.start();
+				   KillCount.setKillCount(Fill.get());
 			   }
 			}, 0L , 20L);
 	}

@@ -13,7 +13,7 @@ public class BleedingSweets implements Listener {
 
 	@EventHandler
 	public void SweetsDrop(PlayerDeathEvent event) {
-		if(!Settings.scenariolist.contains("BleedingSweets") || Chronometer.get() == -1);
+		if(!Settings.scenariolist.contains("BleedingSweets") || Chronometer.get() == -1) return;
 		event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(Material.GOLD_INGOT, 16));
 		event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(Material.IRON_INGOT, 32));
 		event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(Material.DIAMOND, 4));
