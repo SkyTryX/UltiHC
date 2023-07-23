@@ -1,4 +1,4 @@
-package fr.skytryx.ultihc.events;
+package fr.skytryx.ultihc.tools;
 
 import java.util.Arrays;
 
@@ -74,7 +74,7 @@ public class ToolsClick implements Listener{
 	
 	@EventHandler
 	public void OnInvClick(InventoryClickEvent event) {
-		if(event.getClickedInventory() == null || !(event.getClickedInventory().getName().equals("§7Configurations")) || event.getCurrentItem() == null) return;
+		if(!event.getClickedInventory().getName().equals("§7Configurations") || event.getCurrentItem().getType() == Material.AIR) return;
 		event.setCancelled(true);
 		String ClickedItem = event.getCurrentItem().getItemMeta().getDisplayName().substring(2);
 		Player player = (Player) event.getWhoClicked();
@@ -98,6 +98,7 @@ public class ToolsClick implements Listener{
 			scenarioinv.addItem(ItemCreator("§6AbsorptionLess", Material.GOLDEN_APPLE, "GoldenApples does not grant absorption anymore"));
 			scenarioinv.addItem(ItemCreator("§6BleedingSweets", Material.SUGAR, "Killing players gives ores"));
 			scenarioinv.addItem(ItemCreator("§6LuckyLeaves", Material.LEAVES, "Golden apples sometimes drops when a leave breaks"));
+			scenarioinv.addItem(ItemCreator("§6DiamondLess", Material.DIAMOND, "Diamond doesn't drop when breaking a diamond ore"));
 			player.closeInventory();
 			player.openInventory(scenarioinv);	
 		} else if (ClickedItem.equals("Start")) {

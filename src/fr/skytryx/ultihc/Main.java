@@ -1,5 +1,8 @@
 package fr.skytryx.ultihc;
 
+import java.util.Arrays;
+
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.skytryx.ultihc.commands.CommandInspectmap;
@@ -8,10 +11,10 @@ import fr.skytryx.ultihc.events.OnDeath;
 import fr.skytryx.ultihc.events.OnJoin;
 import fr.skytryx.ultihc.events.OnLeave;
 import fr.skytryx.ultihc.events.OnDamage;
-import fr.skytryx.ultihc.events.ToolsClick;
 import fr.skytryx.ultihc.scenarios.AbsorptionLess;
 import fr.skytryx.ultihc.scenarios.BleedingSweets;
 import fr.skytryx.ultihc.scenarios.CutClean;
+import fr.skytryx.ultihc.scenarios.DiamondLess;
 import fr.skytryx.ultihc.scenarios.HasteyBoys;
 import fr.skytryx.ultihc.scenarios.LuckyLeaves;
 import fr.skytryx.ultihc.scenarios.NoClean;
@@ -21,6 +24,8 @@ import fr.skytryx.ultihc.scenarios.config.Bedbombs;
 import fr.skytryx.ultihc.scenarios.config.GodApples;
 import fr.skytryx.ultihc.scenarios.config.Nether;
 import fr.skytryx.ultihc.scenarios.config.Scenarios;
+import fr.skytryx.ultihc.tools.AutoAssign;
+import fr.skytryx.ultihc.tools.ToolsClick;
 import fr.skytryx.ultihc.utils.Settings;
 import fr.skytryx.ultihc.utils.WorldCreation;
 
@@ -33,25 +38,23 @@ public class Main extends JavaPlugin {
 		
 		
 		getServer().getPluginManager().registerEvents(new ToolsClick(this), this);
+		getServer().getPluginManager().registerEvents(new AutoAssign(), this);
 		
 		getServer().getPluginManager().registerEvents(new OnJoin(), this);
 		getServer().getPluginManager().registerEvents(new OnLeave(), this);
 		getServer().getPluginManager().registerEvents(new OnDeath(), this);
 		getServer().getPluginManager().registerEvents(new OnDamage(), this);
 		
-		getServer().getPluginManager().registerEvents(new Scenarios(), this);
-		getServer().getPluginManager().registerEvents(new Nether(), this);
-		getServer().getPluginManager().registerEvents(new Bedbombs(), this);
-		getServer().getPluginManager().registerEvents(new GodApples(), this);
+		Arrays.asList(new Scenarios(), new Nether(), new Bedbombs(), new GodApples()
+				).forEach(c ->{
+					getServer().getPluginManager().registerEvents(c, this);
+				});
 		
-		getServer().getPluginManager().registerEvents(new CutClean(), this);
-		getServer().getPluginManager().registerEvents(new NoClean(), this);
-		getServer().getPluginManager().registerEvents(new Timber(), this);
-		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
-		getServer().getPluginManager().registerEvents(new NoFall(), this);
-		getServer().getPluginManager().registerEvents(new AbsorptionLess(), this);
-		getServer().getPluginManager().registerEvents(new BleedingSweets(), this);
-		getServer().getPluginManager().registerEvents(new LuckyLeaves(), this);
+		Arrays.asList(new CutClean(), new NoClean(), new Timber(),
+				new HasteyBoys(), new NoFall(), new AbsorptionLess(), new BleedingSweets(),
+				new LuckyLeaves(), new DiamondLess()).forEach(c ->{
+					getServer().getPluginManager().registerEvents((Listener) c, this);
+				});
 		
 		System.out.println("[UltiHC] Plugin has been enabled");
 		WorldCreation.CreateWorld();

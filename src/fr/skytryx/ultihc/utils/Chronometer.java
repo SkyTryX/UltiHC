@@ -38,10 +38,8 @@ public class Chronometer {
 					   Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("UltiHC"), ()->{
 						   Bukkit.getWorld("UHC").getWorldBorder().setSize(Integer.parseInt(Settings.get("Border"))*2);
 						   Bukkit.getWorld("UHC_nether").getWorldBorder().setSize((Integer.parseInt(Settings.get("Border"))*2)/8);
-						   if(Integer.parseInt(Settings.get("Border")) > 25)Settings.set("FirstShrink", String.valueOf(Integer.parseInt(Settings.get("FirstShrink"))+Settings.get("ShrinkTime")));
+						   if(Integer.parseInt(Settings.get("Border")) > 25)Settings.set("FirstShrink", String.valueOf(Integer.parseInt(Settings.get("FirstShrink"))+Integer.parseInt(Settings.get("ShrinkTime"))));
 						   Bukkit.broadcastMessage("§bThe Border has shrunk to §6"+ Settings.get("Border"));
-
-
 				   });
 			   }
 			}, 0L , 20L);
@@ -53,6 +51,7 @@ public class Chronometer {
 		seconds-= hours*3600;
 		int minutes= Math.floorDiv(seconds, 60);
 		seconds-= minutes*60;
-		return (String.format("%02d", hours)+":"+String.format("%02d", minutes)+":"+String.format("%02d", seconds));
+		if(hours != 0) return (String.format("%02d", hours)+":"+String.format("%02d", minutes)+":"+String.format("%02d", seconds));
+		else return (String.format("%02d", minutes)+":"+String.format("%02d", seconds));
 		}
 }
