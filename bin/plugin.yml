@@ -8,3 +8,5 @@ commands:
     description: A command to inspect the uhc map
   reloadmap:
     description: A command to reload the uhc map
+  stats:
+    descritpion: A command to look at someone's stats

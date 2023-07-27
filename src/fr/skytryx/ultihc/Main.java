@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.skytryx.ultihc.commands.CommandInspectmap;
 import fr.skytryx.ultihc.commands.CommandReloadmap;
+import fr.skytryx.ultihc.commands.CommandStats;
 import fr.skytryx.ultihc.events.OnDeath;
 import fr.skytryx.ultihc.events.OnJoin;
 import fr.skytryx.ultihc.events.OnLeave;
@@ -35,6 +36,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		getCommand("inspectmap").setExecutor(new CommandInspectmap());
 		getCommand("reloadmap").setExecutor(new CommandReloadmap());
+		getCommand("stats").setExecutor(new CommandStats());
 		
 		
 		getServer().getPluginManager().registerEvents(new ToolsClick(this), this);

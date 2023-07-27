@@ -1,8 +1,12 @@
 package fr.skytryx.ultihc.events;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +24,11 @@ public class OnDeath implements Listener {
 	@EventHandler
 	public void Death(PlayerDeathEvent event) {
 		if(Chronometer.get() != -1) {
+			final File stats = new File(Bukkit.getServer().getPluginManager().getPlugin("UltiHC").getDataFolder(), "stats.yml");
+	        final YamlConfiguration configstats = YamlConfiguration.loadConfiguration(stats);
 			Player player = event.getEntity();
 			String prefix = ChatColor.RED + player.getName() + "["+KillCount.getKill(player)+"] ";
+			configstats.set(player.getUniqueId() + ".death", (Integer)configstats.get(player.getUniqueId() + ".death")+1);
 			if(player.getKiller() == null) {
 			    if (event.getDeathMessage().contains("was killed while trying")) {
 			    event.setDeathMessage(prefix+ "killed by "+player.getKiller().getDisplayName());
@@ -60,6 +67,7 @@ public class OnDeath implements Listener {
 				event.setDeathMessage(prefix + "fell below the world (somehow)");
 				} 
 			} else {
+				configstats.set(player.getKiller().getUniqueId() + ".kills", (Integer)configstats.get(player.getKiller().getUniqueId() + ".kills")+1);
 				KillCount.addKill(player.getKiller());
 				event.setDeathMessage(prefix+"was killed by "+player.getKiller().getName() +"["+KillCount.getKill(player.getKiller())+"]");
 			}
@@ -68,10 +76,16 @@ public class OnDeath implements Listener {
 			if(Fill.get().size() == 1) {
 				Bukkit.broadcastMessage(ChatColor.GOLD+Fill.get().get(0).getDisplayName()+" has won this game! Congrats!");
 				Settings.setWinner(Fill.get().get(0));
+				configstats.set(player.getKiller().getUniqueId() + ".wins", (Integer)configstats.get(player.getKiller().getUniqueId() + ".wins")+1);
 				Bukkit.getScheduler().cancelAllTasks();
 				Bukkit.getOnlinePlayers().forEach(p ->{Scoreboards.PostGame(p);});
 				
 				
+			}
+        	try {
+        		configstats.save(stats);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}

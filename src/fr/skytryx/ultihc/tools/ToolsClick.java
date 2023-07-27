@@ -74,7 +74,7 @@ public class ToolsClick implements Listener{
 	
 	@EventHandler
 	public void OnInvClick(InventoryClickEvent event) {
-		if(!event.getClickedInventory().getName().equals("§7Configurations") || event.getCurrentItem().getType() == Material.AIR) return;
+		if(!event.getInventory().getName().equals("§7Configurations") || event.getCurrentItem().getType() == Material.AIR) return;
 		event.setCancelled(true);
 		String ClickedItem = event.getCurrentItem().getItemMeta().getDisplayName().substring(2);
 		Player player = (Player) event.getWhoClicked();
@@ -133,5 +133,11 @@ public class ToolsClick implements Listener{
 			event.getPlayer().sendMessage("§6The UHC has been set up!");
 		}
 		input = null;
+	}
+	@EventHandler
+	public void StatsClick(InventoryClickEvent event) {
+		if(event.getClickedInventory() == null) return;
+		if(!event.getInventory().getName().equals("§7Stats") || event.getCurrentItem().getType() == Material.AIR) return;
+		event.setCancelled(true);
 	}
 }
