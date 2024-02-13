@@ -74,7 +74,7 @@ public class ToolsClick implements Listener{
 	
 	@EventHandler
 	public void OnInvClick(InventoryClickEvent event) {
-		if(!event.getInventory().getName().equals("§7Configurations") || event.getCurrentItem().getType() == Material.AIR) return;
+		if(!event.getInventory().getName().equals("§7Configurations") || event.getCurrentItem().getType() == null) return;
 		event.setCancelled(true);
 		String ClickedItem = event.getCurrentItem().getItemMeta().getDisplayName().substring(2);
 		Player player = (Player) event.getWhoClicked();
