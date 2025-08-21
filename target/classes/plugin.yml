@@ -1,0 +1,12 @@
+# Auto-generated plugin.yml, generated at 2025/08/21 13:30:41 by org.bukkit.plugin.java.annotation.PluginAnnotationProcessor
+
+main: fr.skytryx.ultihc.UltiHC
+name: UltiHC
+version: '1.0'
+commands:
+  inspectmap:
+    description: inspectmap command
+  reloadmap:
+    description: reloadmap command
+  stats:
+    description: stats command
